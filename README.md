@@ -26,7 +26,7 @@ Europe/Vienna
 Indian/Chagos
 Indian/Maldives
 ___________________________________
-Use BG images tO show day and night.
+Use BG images to show day and night.
 Reload animation: LiquidPullToRefresh. 
 can be found on https://pub.dev/packages/liquid_pull_to_refresh
 
