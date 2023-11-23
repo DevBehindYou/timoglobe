@@ -31,6 +31,8 @@ ___________________________________
 Use BG images to show day and night.
 Reload animation: LiquidPullToRefresh. 
 can be found on https://pub.dev/packages/liquid_pull_to_refresh
+![finl](https://github.com/DevBehindYou/timoglobe/assets/147663456/59975ec4-846e-48ea-af2b-c5a6a53e5a99)
+
 
 ## Getting Started
 
