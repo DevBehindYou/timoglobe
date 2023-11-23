@@ -1,4 +1,5 @@
 # TimOGlobe
+![imOGlobe-portrait (2)](https://github.com/DevBehindYou/timoglobe/assets/147663456/41394580-1278-4bc9-b22b-f5d3990e800c)
 
 A new Flutter project.
 API used: WorldTimeAPI.
@@ -25,6 +26,7 @@ Europe/Rome
 Europe/Vienna
 Indian/Chagos
 Indian/Maldives
+
 ___________________________________
 Use BG images to show day and night.
 Reload animation: LiquidPullToRefresh. 
