@@ -1,7 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, prefer_typing_uninitialized_variables, unused_local_variable, dead_code, empty_constructor_bodies, prefer_initializing_formals, depend_on_referenced_packages, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:weather/pages/server_engine_page.dart';
+import 'package:weather/server/server_engine_page.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class homePage extends StatefulWidget {
@@ -63,7 +63,7 @@ class _homePageState extends State<homePage> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey[700],
+      backgroundColor: Color(0xff29283A),
       body: SafeArea(
         child: LiquidPullToRefresh(
           onRefresh: reload,
@@ -71,7 +71,8 @@ class _homePageState extends State<homePage> {
           height: 270,
           animSpeedFactor: 2.0,
           showChildOpacityTransition: true,
-          child: ListView(
+          child: SingleChildScrollView(
+              child: Column(
             children: [
               SizedBox(
                 height: 20,
@@ -95,7 +96,7 @@ class _homePageState extends State<homePage> {
               ),
               // main container
               Container(
-                height: 750,
+                height: 680,
                 decoration: BoxDecoration(
                     color: Colors.grey[900],
                     borderRadius: BorderRadius.circular(45)),
@@ -104,49 +105,6 @@ class _homePageState extends State<homePage> {
                   children: [
                     SizedBox(height: 20),
                     // inner container + lication and time
-                    Container(
-                      margin: EdgeInsets.all(15),
-                      height: 600,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('image_assets/$bgImage'),
-                            fit: BoxFit.cover),
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 40),
-                          Column(
-                            children: [
-                              SizedBox(height: 20),
-                              Text(recivedData?['location'],
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 40,
-                                      letterSpacing: 2.0)),
-                              Divider(
-                                height: 60,
-                                color: Colors.white,
-                              ),
-                              Text("TIME",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                      letterSpacing: 2.0)),
-                              SizedBox(height: 10),
-                              Text(recivedData?['time'],
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 40,
-                                      letterSpacing: 1.0)),
-                              SizedBox(height: 45),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-
-                    // tap containor => choose location
                     GestureDetector(
                       onTap: () async {
                         try {
@@ -166,61 +124,91 @@ class _homePageState extends State<homePage> {
                         }
                       },
                       child: Container(
+                        margin: EdgeInsets.all(15),
+                        height: 600,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('image_assets/$bgImage'),
+                              fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(40),
+                        ),
                         child: Column(
                           children: [
-                            Icon(
-                              Icons.touch_app,
-                              color: Colors.white,
-                              size: 50,
-                            ),
-                            Text(
-                              "Tap to change Location",
-                              style: TextStyle(
+                            SizedBox(height: 40),
+                            Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Text(recivedData?['location'],
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 40,
+                                        letterSpacing: 2.0)),
+                                Divider(
+                                  height: 60,
                                   color: Colors.white,
-                                  fontSize: 25,
-                                  letterSpacing: 2.0),
-                            ),
-                            SizedBox(height: 5),
+                                ),
+                                Text("TIME",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.white,
+                                        letterSpacing: 2.0)),
+                                SizedBox(height: 10),
+                                Text(recivedData?['time'],
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 40,
+                                        letterSpacing: 1.0)),
+                                SizedBox(height: 45),
+                              ],
+                            )
                           ],
                         ),
                       ),
-                    )
+                    ),
                   ],
+                ),
+              ),
+              // tap containor => choose location
+              GestureDetector(
+                onTap: () async {
+                  try {
+                    dynamic result =
+                        await Navigator.pushNamed(context, '/locationpage');
+                    setState(() {
+                      recivedData = {
+                        'location': result['location'],
+                        'flag': result['flag'],
+                        'time': result['time'],
+                        'isDay': result['isDay'],
+                        'url': result['url']
+                      };
+                    });
+                  } catch (error) {
+                    recivedData = recivedData;
+                  }
+                },
+                child: Container(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.touch_app,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                      Text(
+                        "Tap to change Location",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            letterSpacing: 2.0),
+                      ),
+                      SizedBox(height: 5),
+                    ],
+                  ),
                 ),
               ),
               // tap containor => select default location container
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Center(
-                    child: Container(
-                      padding: EdgeInsets.all(1),
-                      margin: EdgeInsets.only(top: 10.0),
-                      height: 65,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[800],
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(
-                            Icons.location_pin,
-                            size: 22,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            "Set Default Location",
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                letterSpacing: 2.0),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
                 SizedBox(width: 12),
                 GestureDetector(
                   onTap: () {
@@ -242,7 +230,7 @@ class _homePageState extends State<homePage> {
               ]),
               SizedBox(height: 10)
             ],
-          ),
+          )),
         ),
       ),
     );
