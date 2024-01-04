@@ -1,7 +1,7 @@
 # TimOGlobe
+The time of various countries will be displayed on wallpapers with day and time information by Timoglobe.
 ![imOGlobe-portrait (2)](https://github.com/DevBehindYou/timoglobe/assets/147663456/41394580-1278-4bc9-b22b-f5d3990e800c)
 
-A new Flutter project.
 API used: WorldTimeAPI.
 application show time of the countries:
 Asia/Dubai
@@ -29,10 +29,6 @@ Indian/Maldives
 
 ___________________________________
 Use BG images to show day and night.
-Reload animation: LiquidPullToRefresh. 
-can be found on https://pub.dev/packages/liquid_pull_to_refresh
-![finl](https://github.com/DevBehindYou/timoglobe/assets/147663456/59975ec4-846e-48ea-af2b-c5a6a53e5a99)
-
 
 ## Getting Started
 
